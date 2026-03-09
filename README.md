@@ -72,15 +72,18 @@ python 1_compute_cv.py --representation-index 1 --n-worker 5 --filename "dedupli
 
 **Hyperparameter tuning**:
 
-* run  `./3_hpo.py` to perform a grid search to find the best hyperparameters of the best-performing model and representation (SVM and RCKmer-7)
+* run  `./2_hpo.py` to perform a grid search to find the best hyperparameters of the best-performing model and representation (SVM and RCKmer-7)
 
+```
+python 2_hpo.py 
+```
 
 **Compute Jensen-Shannon Divergence (JSD)**:
 * we measure the taxonomic distance between each training data set and each test data set using JSD.
-* run  `./4_compute_jsd.py` to compute the divergence between each training data set and each test data set
+* run  `./3_compute_jsd.py` to compute the divergence between each training data set and each test data set
 
 ```
-python 4_compute_jsd.py 
+python 3_compute_jsd.py 
 ```
 
 ---
