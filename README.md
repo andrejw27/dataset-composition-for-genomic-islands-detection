@@ -67,7 +67,7 @@ python 1_run_cv.py --representation-index 1 --n-worker 5 --filename "deduplicate
 * run `./1_compute_cv.py` to read predictions from the cross-validation and compute the evaluation metrics (F1 score, Precision, Recall, Matthews Correlation Coefficient (MCC), and Accuracy)
 
 ```
-python 1_compute_cv.py --representation-index 1 --n-worker 5 --filename "deduplicated_case1_1" --train-folder "dataset/train_folder"
+python 1_compute_cv.py --filename "deduplicated_case1_1" --data-folder "dataset/train_folder" --output-folder "outputs/crossval" --predictions-folder "outputs/predictions/deduplicated_samples"
 ```
 
 **Hyperparameter tuning**:
