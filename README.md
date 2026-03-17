@@ -27,6 +27,7 @@ git clone git@github.com:andrejw27/dataset-composition-for-genomic-islands-detec
 4. Create conda environment: `sh conda/create_env.sh`
 5. Activate conda environment: `conda activate datacompos`
 6. **Optional**: Remove conda environment (if necessary): `sh conda/remove_env.sh`
+7. Extract all files with form tar.gz (in train_folder and test_folder)
 
 ---
 **Create data sets**:
