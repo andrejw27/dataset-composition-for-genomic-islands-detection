@@ -239,6 +239,7 @@ dependencies:
       - pyparsing==3.3.2
       - qdarkstyle==3.2.3
       - qtpy==2.4.3
+      - scikit-posthocs==0.12.0
       - seaborn==0.13.2
       - sip==6.15.1
       - taxoniq==1.0.3
