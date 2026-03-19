@@ -38,6 +38,7 @@ dependencies:
   - c-ares=1.34.6
   - ca-certificates=2026.2.25
   - cairo=1.18.4
+  - cd-hit=4.8.1
   - click=8.3.1
   - comm=0.2.3
   - cyrus-sasl=2.1.28
