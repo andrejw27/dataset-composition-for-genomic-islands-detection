@@ -43,8 +43,8 @@ python 0_create_training_pool.py
   - download accession2taxid from https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/nucl_gb.accession2taxid.gz to assign taxonomic information to each accession
   - sample some species (from [WHO](https://www.who.int/news/item/17-05-2024-who-updates-list-of-drug-resistant-bacteria-most-threatening-to-human-health) and [RKI](https://www.rki.de/EN/Institute/Organisation/Departments/Department-3/Unit-37/Downloads/Pathogen_list_and_criteria_reserve_antibiotics.pdf?__blob=publicationFile&v=8) pathogen lists)
   
-* run `./0_deduplicate_data.py` to remove high-similar data with a similarity threshold of 95% (in our paper)
-This might take some time, but you can find the deduplicated data in `dataset/train_folder`.
+* run `./0_deduplicate_data.py` to remove high-similar data using [CD-HIT](https://academic.oup.com/bioinformatics/article/28/23/3150/192160?login=false) with a similarity threshold of 95% (in our paper)
+This might take some time, but you can find the deduplicated data in `dataset/train_folder`. Alternatively, you can run the CD-HIT online on https://usegalaxy.eu/ (**Warning: Please consider the accessibility of your data!**)
 
 ```
 python 0_deduplicate_data.py
