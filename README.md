@@ -3,14 +3,12 @@ This is a repository to reproduce the results for the following paper titled "Th
 
 **Abstract**:
 
-Genomic islands (GIs) are the main vehicles for horizontal gene transfer (HGT), which facilitates the rapid dissemination of antimicrobial resistance and virulence factors. 
-Precise GI detection is essential for tracking pathogen evolution and controlling outbreaks. 
-HGT is an inherently multi-species process.
-Although other genomic tasks have leveraged cross-species machine learning (ML) models to expand analysis to understudied species, cross-species models for GI detection are lacking.
-To this end, we examined how dataset composition impacts cross-species generalizability for GI detection. 
-Our results demonstrate that species richness in the training dataset and taxonomic distance to the test species are important for cross-species generalization.
-A negative Pearson correlation ($r=-0.74$, $R^2=0.55$, $p<0.001$) between model performance and taxonomic distance, as measured by Jensen-Shannon divergence (JSD), suggests that greater taxonomic distance diminishes cross-species generalization.
-This study provides insight into future developments in ML approaches for GI detection and emphasizes the importance of quantifying cross-species generalization when reporting model performance.
+Genomic islands (GIs) are among the major vehicles for horizontal gene transfer (HGT), facilitating the rapid dissemination of antimicrobial resistance and virulence factors.
+Accurate GI detection is crucial for tracking pathogen evolution and controlling outbreaks. HGT is an inherently multi-species process. 
+While other genomic tasks have used cross-species machine learning models to analyze understudied species, there are no cross-species models for GI detection. 
+To address this issue, we examined how dataset composition impacts the generalizability of cross-species models for GI detection. Our results demonstrate that species richness in the training dataset and genomic distance between the test species and training species are important for cross-species generalization. 
+A negative relationship between model performance and genomic distance, as measured by Jensen-Shannon Divergence (JSD) and Mash distance, is reflected by the decrease in Precision. 
+This study provides insight into future developments in machine learning approaches for GI detection and emphasizes the importance of quantifying cross-species generalization when reporting model performance. 
 
 ---
 
