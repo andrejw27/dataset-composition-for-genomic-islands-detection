@@ -63,10 +63,10 @@ python 0_create_training_data.py
 **Cross-validation**:
 
 * run `./1_run_cv.py` which requires 4 arguments:
-- **representation-index**: to select which data representations to be used in cross-validation
-- **n_worker**: number of workers to execute the script for parallel processing
-- **filename**: filename of the training data set (case1_1, case1_2, etc.)
-- **train-folder**: folder of the training data sets
+  - **representation-index**: to select which data representations to be used in cross-validation
+  - **n_worker**: number of workers to execute the script for parallel processing
+  - **filename**: filename of the training data set (case1_1, case1_2, etc.)
+  - **train-folder**: folder of the training data sets
 
 ```
 python 1_run_cv.py --representation-index 1 --n-worker 5 --filename "deduplicated_case1_1" --train-folder "dataset/train_folder"
@@ -94,6 +94,20 @@ python 2_hpo.py
 python 3_compute_jsd.py 
 ```
 
+**Train a machine learning model**:
+* run `./train_model.py` which requires these arguments:
+  - **candidates**: specify the type of machine learning model and also data representation (e.g. "RCKmer-7/SVM"). It can also take more than one candidate and train them in an ensemble learning
+  - **ensemble-type**: (optional) the type of ensemble learning, if needed (options: "stacking", "voting_soft", and "voting_hard")
+  - **save-model**: a flag to decide whether to save the model or not
+  - **model-path**: path to save the model
+  - **train-path**: path to the training dataset
+  - **test-path**: path to the test dataset, which is needed to evaluate ensemble learning and determine the best single model
+  - **default-params**: a flag to determine whether to use default hyperparameters or the best hyperparameters obtained from hyperparameter optimization
+
+```
+python train_model.py --train-path "dataset/train_folder/deduplicated_case3_5.fasta" --test-path "dataset/test_folder/in_species.fasta" --default-params False 
+```
+  
 **Run a prediction pipeline to localize GIs within genomes**:
 * we adopt a prediction pipeline TreasureIsland (https://doi.org/10.1093/bioadv/vbae089) and replace the model with our model
 * run `./predictGI.py`to run the prediction pipeline
