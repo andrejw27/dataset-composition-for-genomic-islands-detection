@@ -94,6 +94,19 @@ python 2_hpo.py
 python 3_compute_jsd.py 
 ```
 
+**Run a prediction pipeline to localize GIs within genomes**:
+* we adopt a prediction pipeline TreasureIsland (https://doi.org/10.1093/bioadv/vbae089) and replace the model with our model
+* run `./predictGI.py`to run the prediction pipeline
+* This pipeline takes the following arguments:
+  - **genome-path**: the path to the fasta files of the species of interest ("dataset/genomes/holdout/in_species")
+  - **model**: the trained model ("RCKmer-7_SVM_deduplicated_case3_5_fine_tuned.pkl")
+  - **window-size**: the length of the sliding window, with a default of 10000
+  - **upper-threshold**: the threshold to determine the positive classes. If the probability of a window is below this threshold, then it will be processed further in the fine-tuning boundaries step.
+
+```
+python predictGI.py --genomes-path "dataset/genomes/holdout/in_species" --window-size 10000
+```
+
 ---
 
 To reproduce tables and figures in the manuscript, we provide a jupyter notebook **visualization.ipynb**
