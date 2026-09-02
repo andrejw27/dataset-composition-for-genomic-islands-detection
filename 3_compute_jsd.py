@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
+import subprocess
 from Bio import SeqIO
 from Bio.Seq import Seq
 from scipy.spatial.distance import jensenshannon
@@ -56,12 +57,58 @@ def cross_folder_jsd(folder_a, folder_b, k=4):
             
     return pd.DataFrame(matrix, index=files_a, columns=files_b)
 
+def get_fasta_paths(directory):
+    valid_exts = (".fasta", ".fa", ".fna")
+    return [
+        os.path.abspath(os.path.join(directory, f)) 
+        for f in os.listdir(directory) 
+        if f.endswith(valid_exts)
+    ]
+
+def compute_mash_distance(reference, query, k="21", s="10000", output_file="mash_distances.txt"):
+
+    files_a = get_fasta_paths(query)
+    files_b = get_fasta_paths(reference)
+
+    # Create Mash "sketches" for Folder B (Reference)
+    print("Sketching genomes in Reference...")
+    subprocess.run([
+        "mash", "sketch", 
+        "-o", "reference_sketch", 
+        "-k", k,
+        "-s", "10000",
+        *files_b
+    ], check=True)
+
+    # Calculate distances for each genome in Folder A (Query) against the sketch
+    print("Calculating Mash distances...")
+    with open(output_file, "w") as out_f:
+        for query_file in files_a:
+            # Run Mash distance
+            result = subprocess.run(
+                ["mash", "dist", "reference_sketch.msh", query_file],
+                capture_output=True, text=True, check=True
+            )
+            out_f.write(result.stdout)
+
+    # Clean up the sketch file
+    if os.path.exists("reference_sketch.msh"):
+        os.remove("reference_sketch.msh")
+
 if __name__ == "__main__":
     # --- EXECUTION ---
     # Add your file paths here
     FOLDER_PATH_TRAIN = "dataset/deduplicated_data/data"
     FOLDER_PATH_TEST = "dataset/test_folder"
 
-    result_df = cross_folder_jsd(FOLDER_PATH_TRAIN, FOLDER_PATH_TEST, k=7)
+    distance_metric = "jsd"
+    
+    if distance_metric == "jsd":
+        result_df = cross_folder_jsd(FOLDER_PATH_TRAIN, FOLDER_PATH_TEST, k=7)
+        result_df.to_excel(f"{distance_metric}.xlsx")
+    elif distance_metric == "mash":
+        compute_mash_distance(FOLDER_PATH_TRAIN, FOLDER_PATH_TEST, output_file="mash_distances.txt")
+    else:
+        raise ValueError("Unsupported distance metric. Use 'jsd' or 'mash'.")
 
-    result_df.to_excel("rckmer_jsd_results_deduplicated.xlsx")
+    
